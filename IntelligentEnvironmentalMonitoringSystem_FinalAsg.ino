@@ -7,7 +7,7 @@
 #define DHTPIN D2       // Define the DHT sensor pin
 #define DHTTYPE DHT22   // Define the type of DHT sensor
 #define MQ135PIN A0     // Define the MQ-135 sensor pin
-#define RELAYPIN D5     // Define the relay pin
+#define RELAYPIN D3     // Change relay pin to D3
 
 DHT dht(DHTPIN, DHTTYPE);   // Initialize DHT sensor
 
@@ -97,12 +97,13 @@ void loop() {
 
       // Control relay based on relay state from server
       if (relay_status == 1) {
+        Serial.println("Turning relay ON");
         digitalWrite(RELAYPIN, HIGH);  // Turn relay on
-        delay(100);                    // Blink relay on for 100 ms
+        delay(5000);                   // Keep relay on for 5 seconds
+        Serial.println("Turning relay OFF");
         digitalWrite(RELAYPIN, LOW);   // Turn relay off
-        delay(100);                    // Blink relay off for 100 ms
       } else {
-        digitalWrite(RELAYPIN, LOW);  // Turn relay off
+        digitalWrite(RELAYPIN, LOW);  // Ensure relay is off
       }
 
     } else {
